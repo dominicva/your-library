@@ -1,13 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Fanwood+Text:ital@0;1&family=Noto+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Poppins:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+
+:root {
+  /* colors */
+  --dark: #141417;
+  --primary-color-darker: #12143d;
+  --primary-color: #1920b0;
+  --primary-color-lighter: #7278e8;
+  --white: #fff;
+  --accent-red: #ff6978;
+  --accent-green: #06d6a0;
+
+  /* typography */
+  --heading: 'Poppins', sans-serif;
+  --sub-heading: 'Fanwood Text', serif;
+  --regular-text: 'Noto Sans', sans-serif;
+
+  /* space & size */
+  --radius-xs: 3px;
+
+  /* borders */
+  --border-thin: 1px solid var(--accent-green);
+
+  /*
+  only for reference – not supported in media queries
+
+  small: 480px;
+  medium: 768px;
+  large: 1024px;
+  */
+
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: auto 1fr min-content;
+  grid-template-areas:
+    'header header'
+    'sidebar main'
+    'footer footer';
+}
+
+html,
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0rem;
+  min-height: 100vh;
+  background-color: var(--dark);
+  color: var(--white);
+  font-family: var(--regular-text);
+  line-height: 1.6;
+  font-size: 18px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd,
+dt,
+form,
+fieldset,
+legend,
+input,
+textarea,
+th,
+td,
+button,
+a {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-family: var(--heading);
+  font-weight: 600;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--sub-heading);
+  font-weight: 400;
+}
+
+p,
+span,
+li {
+  font-family: var(--regular-text);
+}
+
+#app {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  padding: 1rem;
+}
+
+#app > * {
+  grid-column: 1 / 1;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#logo {
+  background-image: url('./assets/logo.svg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 4rem;
+  width: 4rem;
+  color: transparent;
+  cursor: pointer;
+}
+
+nav {
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  padding-right: 1rem;
+}
+
+.control-panel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 1rem 0;
+}
+
+#filter-input {
+  max-width: 20rem;
+  min-height: 48px;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-xs);
+  font-size: 1rem;
+  color: var(--dark);
+  letter-spacing: 0.2px;
+}
+
+#filter-input:focus-visible {
+  outline: var(--accent-green) auto 1px;
+}
+
+/* BUTTONS */
+
+button {
+  border: none;
+  font-weight: 600;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  color: var(--primary-color-darker);
+  background-color: var(--accent-green);
+  border-radius: var(--radius-xs);
+  min-width: 64px;
+  min-height: 48px;
+}
+
+#to-search-view:hover {
+  text-decoration: none;
+  background: none;
+}
+
+button.outline {
+  --primary-color-darker: var(--accent-green);
+  background-color: transparent;
+  border: 1px solid var(--accent-green);
+  /* outline: 1px solid var(--accent-green);
+  outline-offset: 0.5rem; */
+}
+
+button.accent {
+  background-color: var(--accent-red);
+}
+
+button.outline.accent {
+  --primary-color-darker: var(--accent-red);
+  background-color: transparent;
+  border: 1px solid var(--accent-red);
+  /* outline: 1px solid var(--accent-red);
+  outline-offset: 0.5rem; */
+}
+
+/* LINKS */
+
+a {
+  color: unset;
+  text-decoration: none;
+}
+
+/*
+Thank you CSS tricks!
+https://css-tricks.com/css-hover-effects-background-masks-3d/
+*/
+a {
+  --b: 1.5px; /* the thickness of the line */
+  --c: var(--white); /* the color */
+  /* color: var(--white); */
+  padding-block: var(--b);
+  background: linear-gradient(var(--c) 50%, #000 0) 0%
+      calc(100% - var(--_p, 0%)) / 100% 200%,
+    linear-gradient(var(--c) 0 0) 0% var(--_p, 0%) / var(--_p, 0%) var(--b)
+      no-repeat;
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  transition: 0.25s var(--_s, 0s) linear,
+    background-size 0.25s calc(0.25s - var(--_s, 0s));
+}
+
+a:hover {
+  --_p: 100%;
+  --_s: 0.3s;
+}
+
+a.accent.green {
+  color: var(--accent-green);
+  filter: brightness(1.1);
+  --c: var(--accent-green);
+}
+
+.upper {
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: -0.2px;
+}
+
+a.accent.red {
+  color: var(--accent-red);
+  filter: brightness(1.1);
+  --c: var(--accent-red);
+}
+
+.thumbnail img {
+  width: 100%;
+  box-sizing: border-box;
+  object-fit: cover;
+  transform: scale(var(--scale, 1)) rotate(var(--rotate, 0deg));
+  transition: 0.3s;
+}
+
+.thumbnail img:hover {
+  --rotate: -2deg;
+  --scale: 0.92;
+}
+
+#add-book-home > a {
+  text-decoration: none;
+}
+
+#add-book-home:hover {
+  opacity: 1;
+  border-radius: 2rem;
+  box-shadow: 0 1px 1px var(--gray);
+}
+
+.filter {
+  grid-column: span 2;
+}
+
+#filter-books {
+  padding: 0.5rem;
+}
+
+.book-container {
+  border: 0.5px solid var(--primary-lighter);
+  border-radius: 6px;
+  margin: 1rem 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem;
+  align-items: end;
+}
+
+.metadata {
+  grid-row: 1 / 2;
+}
+
+#shelf-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--white);
+  color: var(--white);
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  align-self: flex-end;
+  display: block;
+  width: 100%;
+  /* margin: auto; */
+  grid-row: 2 / 2;
+}
+
+@media (min-with: 480px) {
+  .book-container {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  #app {
+    margin: auto;
+    /* display: grid; */
+    /* grid-template-columns: repeat(2, 1fr); */
+    /* gap: 2rem; */
+    max-width: 1024px;
+  }
+  .book-container {
+    padding: 1.25rem;
+  }
 }
