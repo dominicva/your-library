@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Header from './Header';
 
-const Library = () => {
+const Library = ({ books }) => {
   return (
     <main>
       <Header />
