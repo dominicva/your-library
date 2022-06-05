@@ -7,13 +7,55 @@ const SHELVES = [
   { value: 'read', label: 'Read' },
 ];
 
-const Library = ({ books, onShelfChange }) => {
-  const currentlyReading = books.filter(
-    ({ shelf }) => shelf === 'currentlyReading'
+const BookShelf = ({ books, shelf, onShelfChange }) => {
+  return (
+    <div className="bookshelf">
+      <h2 className="bookshelf-title">{shelf.label}</h2>
+      <div className="bookshelf-books">
+        <ol className="books-grid">
+          {books
+            .filter(book => book.shelf === shelf.value)
+            .map(book => (
+              <li key={book.id}>
+                <div className="book">
+                  <div className="book-top">
+                    <div
+                      className="book-cover"
+                      style={{
+                        width: 128,
+                        height: 193,
+                        backgroundImage: `url(${book.imageLinks.thumbnail})`,
+                      }}
+                    ></div>
+                    <div className="book-shelf-changer">
+                      <select
+                        value={book.shelf}
+                        onChange={e => onShelfChange(book, e.target.value)}
+                      >
+                        <option value="move" disabled>
+                          Move to...
+                        </option>
+                        {SHELVES.map(shelf => (
+                          <option key={shelf.value} value={shelf.value}>
+                            {shelf.label}
+                          </option>
+                        ))}
+                        <option value="none">None</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div className="book-title">{book.title}</div>
+                  <div className="book-authors">{book.authors}</div>
+                </div>
+              </li>
+            ))}
+        </ol>
+      </div>
+    </div>
   );
-  const wantToRead = books.filter(({ shelf }) => shelf === 'wantToRead');
-  const read = books.filter(({ shelf }) => shelf === 'read');
+};
 
+const Library = ({ books, onShelfChange }) => {
   return (
     <main>
       <Header />
@@ -22,75 +64,14 @@ const Library = ({ books, onShelfChange }) => {
           <button>Search</button>
         </Link>
       </section>
-      <section>
-        <h2>Currently Reading</h2>
-        <ul>
-          {currentlyReading.map(book => {
-            return (
-              <div key={book.id} className="book-card">
-                <img src={book.imageLinks.thumbnail} alt={book.title} />
-                <div>
-                  <h2>{book.title}</h2>
-                  <h3>{book.authors.join(' & ')}</h3>
-                </div>
-                <select defaultValue={book.shelf}>
-                  {SHELVES.map(({ value, label }) => (
-                    <option value={value} key={label}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            );
-          })}
-        </ul>
-      </section>
-      <section>
-        <h2>Want to Tead</h2>
-        <div>
-          {wantToRead.map(book => {
-            return (
-              <div key={book.id} className="book-card">
-                <img src={book.imageLinks.thumbnail} alt={book.title} />
-                <div>
-                  <h2>{book.title}</h2>
-                  <h3>{book.authors.join(' & ')}</h3>
-                </div>
-                <select defaultValue={book.shelf}>
-                  {SHELVES.map(({ value, label }) => (
-                    <option value={value} key={label}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-      <section>
-        <h2>Read</h2>
-        <div>
-          {read.map(book => {
-            return (
-              <div key={book.id} className="book-card">
-                <img src={book.imageLinks.thumbnail} alt={book.title} />
-                <div>
-                  <h2>{book.title}</h2>
-                  <h3>{book.authors.join(' & ')}</h3>
-                </div>
-                <select defaultValue={book.shelf}>
-                  {SHELVES.map(({ value, label }) => (
-                    <option value={value} key={label}>
-                      {label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {SHELVES.map(shelf => (
+        <BookShelf
+          key={shelf.value}
+          books={books}
+          shelf={shelf}
+          onShelfChange={onShelfChange}
+        />
+      ))}
     </main>
   );
 };
