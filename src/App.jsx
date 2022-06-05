@@ -12,10 +12,10 @@ function App() {
   }, []);
 
   const changeShelf = (book, newShelf) => {
-    const otherBooks = books.filter(b => b.id !== book.id);
-    const updatedBook = { ...book, shelf: newShelf };
+    const unchanged = books.filter(b => b.id !== book.id);
+    const updated = { ...book, shelf: newShelf };
 
-    setBooks([...otherBooks, updatedBook]);
+    setBooks([...unchanged, updated]);
   };
 
   return (
