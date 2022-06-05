@@ -349,3 +349,12 @@ a.accent.red {
     padding: 1.25rem;
   }
 }
+
+/* newer */
+.book-card {
+  border: 0.5px solid var(--accent-green);
+  border-radius: 6px;
+  padding: 16px;
+  /* just for now */
+  max-width: 400px;
+}

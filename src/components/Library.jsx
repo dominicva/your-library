@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import Header from './Header';
 
+const SHELVES = [
+  { value: 'currentlyReading', label: 'Currently Reading' },
+  { value: 'wantToRead', label: 'Want to Read' },
+  { value: 'read', label: 'Read' },
+];
+
 const Library = ({ books, onShelfChange }) => {
   const currentlyReading = books.filter(
     ({ shelf }) => shelf === 'currentlyReading'
   );
-  console.log('currentlyReading:', currentlyReading);
-
   const wantToRead = books.filter(({ shelf }) => shelf === 'wantToRead');
   const read = books.filter(({ shelf }) => shelf === 'read');
 
@@ -27,8 +31,15 @@ const Library = ({ books, onShelfChange }) => {
                 <img src={book.imageLinks.thumbnail} alt={book.title} />
                 <div>
                   <h2>{book.title}</h2>
-                  <h3>{book.authors}</h3>
+                  <h3>{book.authors.join(' & ')}</h3>
                 </div>
+                <select defaultValue={book.shelf}>
+                  {SHELVES.map(({ value, label }) => (
+                    <option value={value} key={label}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
               </div>
             );
           })}
@@ -43,8 +54,15 @@ const Library = ({ books, onShelfChange }) => {
                 <img src={book.imageLinks.thumbnail} alt={book.title} />
                 <div>
                   <h2>{book.title}</h2>
-                  <h3>{book.authors}</h3>
+                  <h3>{book.authors.join(' & ')}</h3>
                 </div>
+                <select defaultValue={book.shelf}>
+                  {SHELVES.map(({ value, label }) => (
+                    <option value={value} key={label}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
               </div>
             );
           })}
@@ -59,8 +77,15 @@ const Library = ({ books, onShelfChange }) => {
                 <img src={book.imageLinks.thumbnail} alt={book.title} />
                 <div>
                   <h2>{book.title}</h2>
-                  <h3>{book.authors}</h3>
+                  <h3>{book.authors.join(' & ')}</h3>
                 </div>
+                <select defaultValue={book.shelf}>
+                  {SHELVES.map(({ value, label }) => (
+                    <option value={value} key={label}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
               </div>
             );
           })}
