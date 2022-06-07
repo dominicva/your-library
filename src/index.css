@@ -19,6 +19,9 @@
   --radius-xs: 3px;
   --radius-sm: 6px;
 
+  /* padding (buttons) */
+  --padding-sm: 0.2rem 0.625rem;
+
   /* borders */
   --border-thin: 1px solid var(--accent-green);
 
@@ -181,7 +184,7 @@ button {
   border-radius: var(--radius-xs);
   min-width: 100px;
   min-height: 48px;
-  transition: 0.25s border-radius linear;
+  transition: 0.25s all linear;
 }
 
 button:hover {
@@ -189,7 +192,7 @@ button:hover {
 }
 
 button:focus {
-  outline: 2px solid var(--primary-color-lighter);
+  outline: 1px solid var(--primary-color-lighter);
   outline-offset: 2px;
 }
 
@@ -315,32 +318,9 @@ a.accent.red {
   grid-row: 1 / 2;
 }
 
-#shelf-select {
-  padding: 0.5rem 0.75rem;
-  border: 1px solid var(--white);
-  color: var(--white);
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
-  align-self: flex-end;
-  display: block;
-  width: 100%;
-  /* margin: auto; */
-  grid-row: 2 / 2;
-}
-
-@media (min-with: 480px) {
-  .book-container {
-    padding: 1rem;
-  }
-}
-
 @media (min-width: 768px) {
   #home {
     margin: auto;
-    /* display: grid; */
-    /* grid-template-columns: repeat(2, 1fr); */
-    /* gap: 2rem; */
     max-width: 1024px;
   }
   .book-container {
@@ -348,25 +328,23 @@ a.accent.red {
   }
 }
 
-/* newer */
 .book-card {
+  margin: 24px 0;
   border: 0.5px solid var(--accent-green);
-  border-radius: 6px;
+  border-radius: 3px;
   padding: 16px;
-  /* just for now */
   max-width: 400px;
 }
 
 #no-books-fallback {
-  position: relative;
-  border: 1px solid var(--accent-green);
-  padding: 24px 24px;
-  border-radius: var(--radius-sm);
+  margin-bottom: 64px;
 }
 
 #preview-library-btn {
   margin-top: 16px;
-  /* position: absolute;
-  top: 0;
-  right: 0; */
+  padding: var(--padding-sm);
+}
+
+.shelf {
+  margin: 32px auto;
 }
