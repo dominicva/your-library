@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import bookPlaceholder from '../assets/book-placeholder.svg';
 // import * as BooksAPI from '../utils/booksAPI';
 
 const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
