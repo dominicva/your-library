@@ -18,14 +18,15 @@ const mockData = {
   },
 };
 
-const PreviewShelves = () => {
-  return Object.values(mockData).map(shelf => (
+const PreviewShelves = ({ books }) => {
+  return Object.values(books).map(shelf => (
     <section key={shelf.label} className="shelf">
-      <h2>{shelf.label}</h2>
+      <h3>{shelf.label}</h3>
       <BookShelf books={shelf.books} />
     </section>
   ));
 };
+
 const BookShelf = ({ books }) => {
   return (
     <>
@@ -46,25 +47,10 @@ const BookShelf = ({ books }) => {
   );
 };
 
-const Home = () => {
-  const [library, setLibrary] = useState({
-    currentlyReading: {
-      label: 'Currently reading',
-      books: [],
-    },
-    wantToRead: {
-      label: 'Want to read',
-      books: [],
-    },
-    read: {
-      label: 'Reading',
-      books: [],
-    },
-  });
-
+const Home = ({ books, onBooksChange }) => {
   const [showPreview, setShowPreview] = useState(false);
 
-  const totalBooks = Object.values(library).reduce(
+  const totalBooks = Object.values(books).reduce(
     (total, shelf) => total + shelf.books.length,
     0
   );
@@ -82,13 +68,13 @@ const Home = () => {
             <section id="no-books-fallback">
               <h2>Let's get some books for you</h2>
               <div>
-                <h3>
+                <p>
                   Your library has no books (yet). Hit the search button above
                   to find your fist book.
-                </h3>
-                <h3>
+                </p>
+                <p>
                   Or if you'd like to see what your libtary could look like...
-                </h3>
+                </p>
                 <button
                   id="preview-library-btn"
                   className={`outline ${showPreview ? 'accent' : ''}`}
@@ -98,7 +84,9 @@ const Home = () => {
                 </button>
               </div>
             </section>
-            <div>{showPreview ? <PreviewShelves /> : null}</div>
+            <div>
+              {showPreview ? <PreviewShelves books={mockData} /> : null}
+            </div>
           </div>
         ) : (
           <>
