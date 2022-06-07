@@ -1,35 +1,13 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import bookPlaceholder from '../assets/book-placeholder.svg';
 
-const mockData = {
-  currentlyReading: {
-    label: 'Currently reading',
-    books: [{ id: 1, title: 'Forward', author: 'Andrew Yang' }],
-  },
-  wantToRead: {
-    label: 'Want to read',
-    books: [{ id: 1, title: 'Lifespan', author: 'David Sinclair' }],
-  },
-  read: {
-    label: 'Read',
-    books: [{ id: 1, title: 'Sapiens', author: 'Yuval Noah Harari' }],
-  },
-};
+const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
 
-const PreviewShelves = ({ books }) => {
-  return Object.values(books).map(shelf => (
-    <section key={shelf.label} className="shelf">
-      <h3>{shelf.label}</h3>
-      <BookShelf books={shelf.books} />
-    </section>
-  ));
-};
-
-const BookShelf = ({ books }) => {
+const BooksList = ({ listTitle, books, onBooksChange }) => {
   return (
-    <>
+    <ul>
+      <h3>{listTitle}</h3>
       {books.map(book => (
         <div key={book.id} className="book-card">
           <img
@@ -43,18 +21,13 @@ const BookShelf = ({ books }) => {
           </div>
         </div>
       ))}
-    </>
+    </ul>
   );
 };
 
 const Home = ({ books, onBooksChange }) => {
-  const [showPreview, setShowPreview] = useState(false);
-
-  const totalBooks = Object.values(books).reduce(
-    (total, shelf) => total + shelf.books.length,
-    0
-  );
-  const noBooks = totalBooks === 0;
+  console.log('books:', books);
+  const shelves = [...SHELVES];
 
   return (
     <div id="home">
@@ -63,7 +36,35 @@ const Home = ({ books, onBooksChange }) => {
         <Link to="/search">Search books</Link>
       </button>
       <main>
-        {noBooks ? (
+        <section>
+          {shelves.map(shelf => {
+            const shelfBooks = books.filter(b => b.shelf === shelf);
+            return (
+              <div key={shelf}>
+                <BooksList
+                  listTitle={shelf}
+                  books={shelfBooks}
+                  onBooksChange={onBooksChange}
+                />
+              </div>
+            );
+          })}
+        </section>
+      </main>
+    </div>
+  );
+};
+
+export default Home;
+
+/*
+
+  // const totalBooks = books.length;
+  // const noBooks = totalBooks === 0;
+
+  // const [showPreview, setShowPreview] = useState(false);
+
+{noBooks ? (
           <div>
             <section id="no-books-fallback">
               <h2>Let's get some books for you</h2>
@@ -88,24 +89,12 @@ const Home = ({ books, onBooksChange }) => {
               {showPreview ? <PreviewShelves books={mockData} /> : null}
             </div>
           </div>
-        ) : (
-          <>
-            <div>Your bookshelves await...</div>
-          </>
-        )}
-      </main>
-    </div>
-  );
-};
-
-export default Home;
-
-/*
+        )
 {showPreview
   ? Object.values(mockData).map(shelf => (
       <section key={shelf.label}>
         <h2>{shelf.label}</h2>
-        <BookShelf books={shelf.books} />
+        <BooksList books={shelf.books} />
       </section>
     ))
   : null}
