@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 // import * as BooksAPI from '../utils/booksAPI';
 
-const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
-
 const BooksList = ({ listTitle, books, onBooksChange }) => {
+  const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
   return (
     <section>
       <h3>{listTitle}</h3>
@@ -45,10 +44,7 @@ const BooksList = ({ listTitle, books, onBooksChange }) => {
   );
 };
 
-const Home = ({ books, onBooksChange }) => {
-  console.log('books home:', books);
-  const shelves = [...SHELVES];
-
+const Home = ({ books, shelves, onBooksChange }) => {
   return (
     <div id="home">
       <Header />
@@ -57,7 +53,7 @@ const Home = ({ books, onBooksChange }) => {
       </button>
       <main>
         <section>
-          {shelves.map(shelf => {
+          {Object.keys(shelves).map(shelf => {
             const shelfBooks = books.filter(b => b.shelf === shelf);
             return (
               <div key={shelf}>

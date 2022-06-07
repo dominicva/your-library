@@ -19,8 +19,8 @@ const shelfState = books => ({
 
 const App = () => {
   const [books, setBooks] = useState([]);
-  const currentShelfState = shelfState(books);
-  console.log('currentShelfState:', currentShelfState);
+  const shelvesState = shelfState(books);
+  // console.log('shelvesState:', shelvesState);
 
   useEffect(() => {
     const initBooks = async () => {
@@ -50,12 +50,22 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home books={books} onBooksChange={handleShelfChange} />}
+          element={
+            <Home
+              books={books}
+              shelves={shelvesState}
+              onBooksChange={handleShelfChange}
+            />
+          }
         />
         <Route
           path="/search"
           element={
-            <SearchBooks books={books} onBooksChange={handleShelfChange} />
+            <SearchBooks
+              books={books}
+              shelvesState={shelvesState}
+              onBooksChange={handleShelfChange}
+            />
           }
         />
       </Routes>
