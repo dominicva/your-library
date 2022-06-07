@@ -4,54 +4,74 @@ import './search.css';
 import arrowIcon from '../assets/arrow-accent-green.svg';
 import * as BooksAPI from '../utils/booksAPI';
 
-const BooksList = ({ listTitle, books, onBooksChange }) => {
+const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
   const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
   return (
     <section>
       <h3>{listTitle}</h3>
       <ul>
-        {books.map(book => (
-          <li key={book.id}>
-            <div className="book-card">
-              <img
-                src={book.imageLinks?.thumbnail}
-                alt={book.title}
-                style={{
-                  width: '120px',
-                  height: '160px',
-                  borderRadius: '3px',
-                  objectFit: 'cover',
-                }}
-              />
-              <div>
-                <h4>{book.title}</h4>
-                <h5>{book.authors?.join(' & ')}</h5>
-              </div>
-              <select
-                id="shelf"
-                value={book.shelf != null ? book.shelf : 'Move to...'}
-                onChange={e => onBooksChange(book.id, e)}
-              >
-                {book.shelf != null ? (
-                  <option value={book.shelf}>{book.shelf}</option>
+        {books.map(book => {
+          // console.log('book.shelf:', book.shelf);
+          const isNewBook = book.shelf == null;
+          // console.log('isNewBook:', isNewBook);
+
+          return (
+            <li key={book.id}>
+              <div className="book-card">
+                <img
+                  src={book.imageLinks?.thumbnail}
+                  alt={book.title}
+                  style={{
+                    width: '120px',
+                    height: '160px',
+                    borderRadius: '3px',
+                    objectFit: 'cover',
+                  }}
+                />
+                <div>
+                  <h4>{book.title}</h4>
+                  <h5>{book.authors?.join(' & ')}</h5>
+                </div>
+
+                {isNewBook ? (
+                  <select
+                    id="shelf"
+                    value="Move to..."
+                    onChange={e => onAddBook(book, e)}
+                  >
+                    <option disabled={true}>Move to...</option>
+                    {SHELVES.map(shelf => (
+                      <option key={shelf} value={shelf}>
+                        {shelf}
+                      </option>
+                    ))}
+                  </select>
                 ) : (
-                  <option disabled={true}>Move to...</option>
+                  <select
+                    id="shelf"
+                    value={book.shelf}
+                    onChange={e => onShelfChange(book.id, e)}
+                  >
+                    <option disabled={true}>Move to...</option>
+                    <option value={book.shelf}>{book.shelf}</option>
+
+                    {SHELVES.filter(s => s !== book.shelf).map(shelf => (
+                      <option key={shelf} value={shelf}>
+                        {shelf}
+                      </option>
+                    ))}
+                  </select>
                 )}
-                {SHELVES.filter(s => s !== book.shelf).map(shelf => (
-                  <option key={shelf} value={shelf}>
-                    {shelf}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </li>
-        ))}
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
 };
 
-const SearchBooks = ({ books, shelvesState, onBooksChange }) => {
+const SearchBooks = ({ books, shelvesState, onShelfChange, onAddBook }) => {
   const [query, setQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
@@ -59,16 +79,13 @@ const SearchBooks = ({ books, shelvesState, onBooksChange }) => {
     const fetchResults = async () => {
       if (!query) return;
       const books = await BooksAPI.search(query, 5);
-      // console.log('books:', books);
 
-      // check if in shelfstate
       for (const book of books) {
         for (const [shelf, ids] of Object.entries(shelvesState)) {
           if (ids.includes(book.id)) {
             book.shelf = shelf;
           }
         }
-        // console.log('book:', book);
       }
 
       setSearchResults(books);
@@ -108,7 +125,8 @@ const SearchBooks = ({ books, shelvesState, onBooksChange }) => {
         <BooksList
           listTitle="Results"
           books={searchResults}
-          onBooksChange={onBooksChange}
+          onShelfChange={onShelfChange}
+          onAddBook={onAddBook}
         />
       </div>
     </div>

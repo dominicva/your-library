@@ -15,12 +15,14 @@ const shelfState = books => ({
   read: getShelfIds(books, 'read'),
 });
 
+const isNewBook = (books, newBook) => {};
+
 // ******************************************
 
 const App = () => {
   const [books, setBooks] = useState([]);
+  console.log('books from App():', books);
   const shelvesState = shelfState(books);
-  // console.log('shelvesState:', shelvesState);
 
   useEffect(() => {
     const initBooks = async () => {
@@ -45,6 +47,11 @@ const App = () => {
     );
   }
 
+  function handleAddBook(book, e) {
+    book.shelf = e.target.value;
+    setBooks([...books, book]);
+  }
+
   return (
     <>
       <Routes>
@@ -64,7 +71,8 @@ const App = () => {
             <SearchBooks
               books={books}
               shelvesState={shelvesState}
-              onBooksChange={handleShelfChange}
+              onShelfChange={handleShelfChange}
+              onAddBook={handleAddBook}
             />
           }
         />
