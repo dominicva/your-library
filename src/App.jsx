@@ -1,33 +1,16 @@
-import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Library from './components/Library';
-import Search from './components/Search';
-import * as BooksAPI from './utils/booksAPI';
+import Home from './components/Home';
+import SearchBooks from './components/SearchBooks';
 
-function App() {
-  const [books, setBooks] = useState([]);
-
-  useEffect(() => {
-    BooksAPI.getAll().then(setBooks).catch(console.error);
-  }, []);
-
-  const changeShelf = (book, newShelf) => {
-    const unchanged = books.filter(b => b.id !== book.id);
-    const updated = { ...book, shelf: newShelf };
-
-    setBooks([...unchanged, updated]);
-  };
-
+const App = () => {
   return (
-    <Routes>
-      <Route
-        exact
-        path="/"
-        element={<Library books={books} onShelfChange={changeShelf} />}
-      />
-      <Route path="/search" element={<Search />} />
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search" element={<SearchBooks />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;

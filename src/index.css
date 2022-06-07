@@ -17,18 +17,16 @@
 
   /* space & size */
   --radius-xs: 3px;
+  --radius-sm: 6px;
 
   /* borders */
   --border-thin: 1px solid var(--accent-green);
 
   /*
-  only for reference – not supported in media queries
-
   small: 480px;
   medium: 768px;
   large: 1024px;
   */
-
   box-sizing: border-box;
 }
 
@@ -93,12 +91,11 @@ a {
   padding: 0;
 }
 
-h1 {
+h1,
+h2 {
   font-family: var(--heading);
-  font-weight: 600;
 }
 
-h2,
 h3,
 h4,
 h5,
@@ -111,17 +108,15 @@ p,
 span,
 li {
   font-family: var(--regular-text);
+  font-size: 1rem;
 }
 
-#app {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(var(--columns), 1fr);
+#home {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
   padding: 1rem;
-}
-
-#app > * {
-  grid-column: 1 / 1;
 }
 
 header {
@@ -145,13 +140,6 @@ header {
   width: 4rem;
   color: transparent;
   cursor: pointer;
-}
-
-nav {
-  display: flex;
-  height: 2rem;
-  align-items: center;
-  padding-right: 1rem;
 }
 
 .control-panel {
@@ -183,7 +171,6 @@ nav {
 }
 
 /* BUTTONS */
-
 button {
   border: none;
   font-weight: 600;
@@ -192,8 +179,29 @@ button {
   color: var(--primary-color-darker);
   background-color: var(--accent-green);
   border-radius: var(--radius-xs);
-  min-width: 64px;
+  min-width: 100px;
   min-height: 48px;
+  transition: 0.25s border-radius linear;
+}
+
+button:hover {
+  border-radius: 32px;
+}
+
+button:focus {
+  outline: 2px solid var(--primary-color-lighter);
+  outline-offset: 2px;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transition: none;
+  border: none;
+}
+
+button:disabled:hover {
+  border-radius: 2px;
 }
 
 #to-search-view:hover {
@@ -205,8 +213,6 @@ button.outline {
   --primary-color-darker: var(--accent-green);
   background-color: transparent;
   border: 1px solid var(--accent-green);
-  /* outline: 1px solid var(--accent-green);
-  outline-offset: 0.5rem; */
 }
 
 button.accent {
@@ -217,15 +223,18 @@ button.outline.accent {
   --primary-color-darker: var(--accent-red);
   background-color: transparent;
   border: 1px solid var(--accent-red);
-  /* outline: 1px solid var(--accent-red);
-  outline-offset: 0.5rem; */
 }
 
 /* LINKS */
+button > a,
+button > a:hover {
+  background: none;
+}
 
 a {
   color: unset;
   text-decoration: none;
+  max-width: max-content;
 }
 
 /*
@@ -235,7 +244,6 @@ https://css-tricks.com/css-hover-effects-background-masks-3d/
 a {
   --b: 1.5px; /* the thickness of the line */
   --c: var(--white); /* the color */
-  /* color: var(--white); */
   padding-block: var(--b);
   background: linear-gradient(var(--c) 50%, #000 0) 0%
       calc(100% - var(--_p, 0%)) / 100% 200%,
@@ -283,16 +291,6 @@ a.accent.red {
   --scale: 0.92;
 }
 
-#add-book-home > a {
-  text-decoration: none;
-}
-
-#add-book-home:hover {
-  opacity: 1;
-  border-radius: 2rem;
-  box-shadow: 0 1px 1px var(--gray);
-}
-
 .filter {
   grid-column: span 2;
 }
@@ -338,7 +336,7 @@ a.accent.red {
 }
 
 @media (min-width: 768px) {
-  #app {
+  #home {
     margin: auto;
     /* display: grid; */
     /* grid-template-columns: repeat(2, 1fr); */
@@ -357,4 +355,18 @@ a.accent.red {
   padding: 16px;
   /* just for now */
   max-width: 400px;
+}
+
+#no-books-fallback {
+  position: relative;
+  border: 1px solid var(--accent-green);
+  padding: 24px 24px;
+  border-radius: var(--radius-sm);
+}
+
+#preview-library-btn {
+  margin-top: 16px;
+  /* position: absolute;
+  top: 0;
+  right: 0; */
 }

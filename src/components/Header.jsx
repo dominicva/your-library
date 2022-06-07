@@ -6,7 +6,8 @@ const Header = () => {
           Logo
         </div>
         <div>
-          <h1>My Library</h1>
+          <h1>Your Library</h1>
+          <hr />
         </div>
       </div>
     </header>
