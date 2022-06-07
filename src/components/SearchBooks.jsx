@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './search.css';
 import arrowIcon from '../assets/arrow-accent-green.svg';
+import * as BooksAPI from '../utils/booksAPI';
 
-const SearchBooks = () => {
+const SearchBooks = ({ books, onBooksChange }) => {
   const [query, setQuery] = useState('');
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      if (!query) return;
+      const response = await BooksAPI.search(query, 5);
+      console.log('response:', response);
+    };
+
+    fetchResults();
+  }, [query]);
 
   return (
     <div id="search">

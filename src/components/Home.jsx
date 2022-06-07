@@ -1,32 +1,53 @@
 import { Link } from 'react-router-dom';
 import Header from './Header';
 import bookPlaceholder from '../assets/book-placeholder.svg';
+// import * as BooksAPI from '../utils/booksAPI';
 
 const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
 
 const BooksList = ({ listTitle, books, onBooksChange }) => {
   return (
-    <ul>
+    <section>
       <h3>{listTitle}</h3>
-      {books.map(book => (
-        <div key={book.id} className="book-card">
-          <img
-            src={bookPlaceholder}
-            alt="placeholder book"
-            style={{ width: '48px', height: '48px', borderRadius: '8px' }}
-          />
-          <div>
-            <h3>{book.title}</h3>
-            <h4>{book.author}</h4>
-          </div>
-        </div>
-      ))}
-    </ul>
+      <ul>
+        {books.map(book => (
+          <li key={book.id}>
+            <div className="book-card">
+              <img
+                src={book.imageLinks?.thumbnail}
+                alt={book.title}
+                style={{
+                  width: '120px',
+                  height: '160px',
+                  borderRadius: '3px',
+                  objectFit: 'cover',
+                }}
+              />
+              <div>
+                <h4>{book.title}</h4>
+                <h5>{book.authors.join(' & ')}</h5>
+              </div>
+              <select
+                id="shelf"
+                value={book.shelf}
+                onChange={e => onBooksChange(book.id, e)}
+              >
+                {SHELVES.map(shelf => (
+                  <option key={shelf} value={shelf}>
+                    {shelf}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 };
 
 const Home = ({ books, onBooksChange }) => {
-  console.log('books:', books);
+  console.log('books home:', books);
   const shelves = [...SHELVES];
 
   return (

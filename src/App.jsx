@@ -4,11 +4,32 @@ import Home from './components/Home';
 import SearchBooks from './components/SearchBooks';
 import * as BooksAPI from './utils/booksAPI';
 
+const getShelfIds = (books, shelf) =>
+  books.filter(b => b.shelf === shelf).map(({ id }) => id);
+
+const shelfState = books => {
+  const currentlyReading = getShelfIds(books, 'currentlyReading');
+  const wantToRead = getShelfIds(books, 'wantToRead');
+  const read = getShelfIds(books, 'read');
+
+  return {
+    currentlyReading,
+    wantToRead,
+    read,
+  };
+};
+
 const App = () => {
   const [books, setBooks] = useState([]);
+  const currentShelfState = shelfState(books);
+  console.log('currentShelfState:', currentShelfState);
 
   useEffect(() => {
-    BooksAPI.getAll().then(setBooks).catch(console.error);
+    const initBooks = async () => {
+      const starterBooks = await BooksAPI.getAll();
+      setBooks(starterBooks);
+    };
+    initBooks();
   }, []);
 
   function handleShelfChange(bookId, e) {
@@ -33,7 +54,12 @@ const App = () => {
           path="/"
           element={<Home books={books} onBooksChange={handleShelfChange} />}
         />
-        <Route path="/search" element={<SearchBooks />} />
+        <Route
+          path="/search"
+          element={
+            <SearchBooks books={books} onBooksChange={handleShelfChange} />
+          }
+        />
       </Routes>
     </>
   );
