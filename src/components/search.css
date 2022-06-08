@@ -1,11 +1,3 @@
-#search {
-  padding: 18px;
-}
-
-#link-to-home {
-  margin-bottom: 24px;
-}
-
 #link-to-home > a {
   display: flex;
   align-items: center;
@@ -14,11 +6,6 @@
 .icon.arrow {
   width: 64px;
   margin: -8px -12px;
-}
-
-#search-books-form {
-  margin-top: 24px;
-  margin-bottom: 16px;
 }
 
 .form-control {
@@ -34,7 +21,7 @@
 }
 
 #live-query {
-  color: var(--accent-green);
+  color: var(--primary-color-lighter);
   font-weight: 600;
   letter-spacing: 0.75px;
 }

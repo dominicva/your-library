@@ -37,7 +37,7 @@ const SearchBooks = ({ books, shelvesState, onShelfChange, onAddBook }) => {
   }, [query, shelvesState]);
 
   return (
-    <div id="search">
+    <div id="search" className="layout">
       <div id="link-to-home">
         <Link className="accent green" to="/">
           <img className="icon arrow" src={arrowIcon} alt="right arrow" />

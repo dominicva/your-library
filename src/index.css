@@ -123,6 +123,22 @@ ol {
   list-style-type: none;
 }
 
+/* #root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
+  padding: 18px;
+} */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 36px;
+  padding: 18px;
+}
+
 #home {
   display: flex;
   flex-direction: column;
@@ -327,27 +343,17 @@ a.accent.red {
   grid-row: 1 / 2;
 }
 
-@media (min-width: 768px) {
-  #home {
-    margin: auto;
-    max-width: 1024px;
-  }
-  .book-container {
-    padding: 1.25rem;
-  }
-}
-
 .book-card {
   margin: 24px 0;
   border: 0.5px solid var(--accent-green);
-  border-radius: 3px;
+  border-radius: 4px;
   padding: 16px;
   min-height: 360px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 360px;
-  margin: 24px auto;
+  align-items: center;
+  text-align: center;
 }
 
 #no-books-fallback {
@@ -367,6 +373,11 @@ main {
   width: 100%;
 }
 
+.list-container {
+  max-width: 360px;
+  margin: 24px auto;
+}
+
 .list-title {
   grid-column: span 2;
 }
@@ -383,7 +394,46 @@ main {
   justify-self: center;
 }
 
+select {
+  min-height: 40px;
+  width: 140px;
+  justify-self: center;
+  color: var(--primary-color-lighter);
+  background-color: transparent;
+  padding: 4px;
+  border-radius: 2px;
+  border: 1px solid var(--primary-color-lighter);
+}
+
+input {
+  border: 1.5px solid var(--primary-color-lighter);
+  background-color: transparent;
+  color: var(--primary-color-lighter);
+}
+
+select:active,
+select:focus,
+input:active,
+input:focus {
+  outline: 1px solid var(--accent-red);
+  outline-offset: 2px;
+}
+
 @media (min-width: 768px) {
+  #home,
+  .layout {
+    margin: auto;
+    max-width: 1024px;
+  }
+
+  .book-container {
+    padding: 1.25rem;
+  }
+
+  .list-container {
+    max-width: unset;
+  }
+
   .list-books {
     display: grid;
     gap: 32px;
@@ -396,6 +446,7 @@ main {
     grid-template-rows: 1fr 0.15fr;
     gap: 8px;
     max-width: unset;
+    text-align: unset;
   }
 
   .book-image {
