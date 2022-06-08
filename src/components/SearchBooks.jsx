@@ -11,18 +11,26 @@ const SearchBooks = ({ books, shelvesState, onShelfChange, onAddBook }) => {
 
   useEffect(() => {
     const fetchResults = async () => {
-      if (!query) return;
-      const books = await BooksAPI.search(query, 5);
-
-      for (const book of books) {
-        for (const [shelf, ids] of Object.entries(shelvesState)) {
-          if (ids.includes(book.id)) {
-            book.shelf = shelf;
-          }
-        }
+      if (!query) {
+        setSearchResults([]);
+        return;
       }
 
-      setSearchResults(books);
+      try {
+        const books = await BooksAPI.search(query, 5);
+
+        for (const book of books) {
+          for (const [shelf, ids] of Object.entries(shelvesState)) {
+            if (ids.includes(book.id)) {
+              book.shelf = shelf;
+            }
+          }
+        }
+        setSearchResults(books);
+      } catch (error) {
+        console.log(error);
+        setSearchResults([]);
+      }
     };
 
     fetchResults();
