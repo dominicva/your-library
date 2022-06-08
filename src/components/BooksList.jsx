@@ -1,9 +1,5 @@
 import { camelToTitle } from '../utils/strings';
-import {
-  BookCardBase,
-  SelectNewBook,
-  SelectOldBook,
-} from '../utils/BookHelpers';
+import { BookCardBase, SelectNewBook, SelectOldBook } from './lib/BookHelpers';
 
 const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
   return (

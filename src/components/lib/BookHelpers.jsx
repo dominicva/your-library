@@ -1,4 +1,4 @@
-import { camelToTitle } from './strings';
+import { camelToTitle } from '../../utils/strings';
 
 const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
 
