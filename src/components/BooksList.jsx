@@ -4,9 +4,9 @@ const camelToTitle = str => {
   });
 };
 
-const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
-  const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
+const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
 
+const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
   return (
     <>
       <h3 className="list-title">{camelToTitle(listTitle)}</h3>

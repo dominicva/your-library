@@ -49,6 +49,7 @@ const App = () => {
         return book;
       }
     });
+
     setBooks(updatedState);
     window.localStorage.setItem('books', JSON.stringify(updatedState));
   }
@@ -56,6 +57,7 @@ const App = () => {
   function handleAddBook(book, e) {
     book.shelf = e.target.value;
     const updatedState = [...books, book];
+
     setBooks(updatedState);
     window.localStorage.setItem('books', JSON.stringify(updatedState));
   }

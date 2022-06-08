@@ -344,7 +344,7 @@ a.accent.red {
 }
 
 .book-card {
-  margin: 24px 0;
+  margin-bottom: 24px;
   border: 0.5px solid var(--accent-green);
   border-radius: 4px;
   padding: 16px;
@@ -376,10 +376,12 @@ main {
 .list-container {
   max-width: 360px;
   margin: 24px auto;
+  margin-bottom: 96px;
 }
 
 .list-title {
   grid-column: span 2;
+  margin-bottom: 8px;
 }
 
 .book-image {
@@ -447,6 +449,7 @@ input:focus {
     gap: 8px;
     max-width: unset;
     text-align: unset;
+    margin: unset;
   }
 
   .book-image {

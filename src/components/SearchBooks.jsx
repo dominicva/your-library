@@ -59,9 +59,11 @@ const SearchBooks = ({ books, shelvesState, onShelfChange, onAddBook }) => {
         </div>
       </form>
       <div>
-        <p>
-          Showing results for: <span id="live-query">{query}</span>
-        </p>
+        {query.length > 0 ? (
+          <p>
+            Showing results for: <span id="live-query">{query}</span>
+          </p>
+        ) : null}
       </div>
       <div>
         <BooksList
