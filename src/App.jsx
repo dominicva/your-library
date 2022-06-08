@@ -15,8 +15,6 @@ const shelfState = books => ({
   read: getShelfIds(books, 'read'),
 });
 
-const isNewBook = (books, newBook) => {};
-
 // ******************************************
 
 const App = () => {
@@ -61,7 +59,7 @@ const App = () => {
             <Home
               books={books}
               shelves={shelvesState}
-              onBooksChange={handleShelfChange}
+              onShelfChange={handleShelfChange}
             />
           }
         />
