@@ -5,8 +5,7 @@ const camelToTitle = str => {
 };
 
 const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
-  const shelfTypes = ['currentlyReading', 'wantToRead', 'read'];
-  const shelfLabels = shelfTypes.map(camelToTitle);
+  const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
 
   return (
     <>
@@ -35,16 +34,16 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
                     onChange={e => onAddBook(book, e)}
                   >
                     <option disabled={true}>Move to...</option>
-                    {shelfLabels.map(shelf => (
+                    {SHELVES.map(shelf => (
                       <option key={shelf} value={shelf}>
-                        {shelf}
+                        {camelToTitle(shelf)}
                       </option>
                     ))}
                   </select>
                 ) : (
                   <select
                     id="shelf"
-                    value={camelToTitle(book.shelf)}
+                    value={book.shelf}
                     onChange={e => onShelfChange(book.id, e)}
                   >
                     <option disabled={true}>Move to...</option>
@@ -52,13 +51,11 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
                       {camelToTitle(book.shelf)}
                     </option>
 
-                    {shelfTypes
-                      .filter(s => s !== book.shelf)
-                      .map(shelf => (
-                        <option key={shelf} value={camelToTitle(shelf)}>
-                          {camelToTitle(shelf)}
-                        </option>
-                      ))}
+                    {SHELVES.filter(s => s !== book.shelf).map(shelf => (
+                      <option key={shelf} value={shelf}>
+                        {camelToTitle(shelf)}
+                      </option>
+                    ))}
                   </select>
                 )}
               </div>
