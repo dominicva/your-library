@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './search.css';
-import arrowIcon from '../assets/arrow-accent-green.svg';
-import * as BooksAPI from '../utils/booksAPI';
 import BooksList from './BooksList';
+import * as BooksAPI from '../utils/booksAPI';
+import arrowIcon from '../assets/arrow-accent-green.svg';
+import './search.css';
 
 const SearchBooks = ({ books, shelvesState, onShelfChange, onAddBook }) => {
   const [query, setQuery] = useState('');

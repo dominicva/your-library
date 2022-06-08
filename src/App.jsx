@@ -18,36 +18,47 @@ const shelfState = books => ({
 // ******************************************
 
 const App = () => {
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState(
+    JSON.parse(window.localStorage.getItem('books')) ?? []
+  );
   console.log('books from App():', books);
   const shelvesState = shelfState(books);
 
   useEffect(() => {
+    const storedLocally = window.localStorage.getItem('books');
+    if (storedLocally) {
+      setBooks(JSON.parse(storedLocally));
+      return;
+    }
+
     const initBooks = async () => {
       const starterBooks = await BooksAPI.getAll();
       setBooks(starterBooks);
     };
+
     initBooks();
   }, []);
 
   function handleShelfChange(bookId, e) {
-    setBooks(
-      books.map(book => {
-        if (book.id === bookId) {
-          return {
-            ...book,
-            shelf: e.target.value,
-          };
-        } else {
-          return book;
-        }
-      })
-    );
+    const updatedState = books.map(book => {
+      if (book.id === bookId) {
+        return {
+          ...book,
+          shelf: e.target.value,
+        };
+      } else {
+        return book;
+      }
+    });
+    setBooks(updatedState);
+    window.localStorage.setItem('books', JSON.stringify(updatedState));
   }
 
   function handleAddBook(book, e) {
     book.shelf = e.target.value;
-    setBooks([...books, book]);
+    const updatedState = [...books, book];
+    setBooks(updatedState);
+    window.localStorage.setItem('books', JSON.stringify(updatedState));
   }
 
   return (
