@@ -1,9 +1,16 @@
+const camelToTitle = str => {
+  return str.replace(/([A-Z])/g, ' $1').replace(/^./, function (str) {
+    return str.toUpperCase();
+  });
+};
+
 const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
-  const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
+  const shelfTypes = ['currentlyReading', 'wantToRead', 'read'];
+  const shelfLabels = shelfTypes.map(camelToTitle);
 
   return (
     <>
-      <h3 className="list-title">{listTitle}</h3>
+      <h3 className="list-title">{camelToTitle(listTitle)}</h3>
       <ul className="list-books">
         {books.map(book => {
           const isNewBook = book.shelf == null;
@@ -28,7 +35,7 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
                     onChange={e => onAddBook(book, e)}
                   >
                     <option disabled={true}>Move to...</option>
-                    {SHELVES.map(shelf => (
+                    {shelfLabels.map(shelf => (
                       <option key={shelf} value={shelf}>
                         {shelf}
                       </option>
@@ -37,17 +44,21 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
                 ) : (
                   <select
                     id="shelf"
-                    value={book.shelf}
+                    value={camelToTitle(book.shelf)}
                     onChange={e => onShelfChange(book.id, e)}
                   >
                     <option disabled={true}>Move to...</option>
-                    <option value={book.shelf}>{book.shelf}</option>
+                    <option value={book.shelf}>
+                      {camelToTitle(book.shelf)}
+                    </option>
 
-                    {SHELVES.filter(s => s !== book.shelf).map(shelf => (
-                      <option key={shelf} value={shelf}>
-                        {shelf}
-                      </option>
-                    ))}
+                    {shelfTypes
+                      .filter(s => s !== book.shelf)
+                      .map(shelf => (
+                        <option key={shelf} value={camelToTitle(shelf)}>
+                          {camelToTitle(shelf)}
+                        </option>
+                      ))}
                   </select>
                 )}
               </div>
