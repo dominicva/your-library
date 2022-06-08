@@ -13,6 +13,7 @@ const Home = ({ books, shelves, onShelfChange }) => {
         <section>
           {Object.keys(shelves).map(shelf => {
             const shelfBooks = books.filter(b => b.shelf === shelf);
+
             return (
               <div key={shelf}>
                 <BooksList

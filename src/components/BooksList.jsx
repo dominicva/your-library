@@ -1,5 +1,6 @@
 const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
   const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
+
   return (
     <section>
       <h3>{listTitle}</h3>

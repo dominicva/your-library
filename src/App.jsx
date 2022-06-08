@@ -19,9 +19,8 @@ const shelfState = books => ({
 
 const App = () => {
   const [books, setBooks] = useState(
-    JSON.parse(window.localStorage.getItem('books')) ?? []
+    () => JSON.parse(window.localStorage.getItem('books')) ?? []
   );
-  console.log('books from App():', books);
   const shelvesState = shelfState(books);
 
   useEffect(() => {
