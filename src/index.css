@@ -38,17 +38,6 @@
 *:after {
   box-sizing: inherit;
 }
-/*
-.grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: 200px 1fr;
-  grid-template-rows: auto 1fr min-content;
-  grid-template-areas:
-    'header header'
-    'sidebar main'
-    'footer footer';
-} */
 
 html,
 body {
@@ -123,14 +112,6 @@ ol {
   list-style-type: none;
 }
 
-/* #root {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 36px;
-  padding: 18px;
-} */
-
 .layout {
   display: flex;
   flex-direction: column;
@@ -168,34 +149,6 @@ header {
   width: 4rem;
   color: transparent;
   cursor: pointer;
-}
-
-.control-panel {
-  display: flex;
-  justify-content: space-between;
-}
-
-.filter {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  margin: 1rem 0;
-}
-
-#filter-input {
-  max-width: 20rem;
-  min-height: 48px;
-  padding: 0.25rem 0.5rem;
-  border: none;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: var(--radius-xs);
-  font-size: 1rem;
-  color: var(--dark);
-  letter-spacing: 0.2px;
-}
-
-#filter-input:focus-visible {
-  outline: var(--accent-green) auto 1px;
 }
 
 /* BUTTONS */
@@ -254,6 +207,7 @@ button.outline.accent {
 }
 
 /* LINKS */
+
 button > a,
 button > a:hover {
   background: none;
@@ -306,43 +260,6 @@ a.accent.red {
   --c: var(--accent-red);
 }
 
-.thumbnail img {
-  width: 100%;
-  box-sizing: border-box;
-  object-fit: cover;
-  transform: scale(var(--scale, 1)) rotate(var(--rotate, 0deg));
-  transition: 0.3s;
-}
-
-.thumbnail img:hover {
-  --rotate: -2deg;
-  --scale: 0.92;
-}
-
-.filter {
-  grid-column: span 2;
-}
-
-#filter-books {
-  padding: 0.5rem;
-}
-
-.book-container {
-  border: 0.5px solid var(--primary-lighter);
-  border-radius: 6px;
-  margin: 1rem 0 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 1rem;
-  padding: 0.5rem;
-  align-items: end;
-}
-
-.metadata {
-  grid-row: 1 / 2;
-}
-
 .book-card {
   margin-bottom: 24px;
   border: 0.5px solid var(--accent-green);
@@ -354,19 +271,6 @@ a.accent.red {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-}
-
-#no-books-fallback {
-  margin-bottom: 64px;
-}
-
-#no-books-fallback > h2 {
-  margin-bottom: 16px;
-}
-
-#preview-library-btn {
-  margin-top: 24px;
-  padding: var(--padding-sm);
 }
 
 main {
