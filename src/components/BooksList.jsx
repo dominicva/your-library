@@ -17,8 +17,8 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
                   alt={book.title}
                 />
                 <div className="book-info">
-                  <h4>{book.title}</h4>
-                  <h5>{book.authors?.join(' & ')}</h5>
+                  <h3>{book.title}</h3>
+                  <h4>{book.authors?.join(' & ')}</h4>
                 </div>
 
                 {isNewBook ? (

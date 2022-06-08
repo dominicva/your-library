@@ -346,6 +346,8 @@ a.accent.red {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 360px;
+  margin: 24px auto;
 }
 
 #no-books-fallback {
@@ -370,9 +372,9 @@ main {
 }
 
 .book-image {
-  width: 120px;
-  height: 160px;
-  border-radius: 3px;
+  width: 140px;
+  height: 180px;
+  border-radius: 4px;
   object-fit: cover;
 }
 
@@ -381,7 +383,7 @@ main {
   justify-self: center;
 }
 
-@media (min-width: 36rem) {
+@media (min-width: 768px) {
   .list-books {
     display: grid;
     gap: 32px;
@@ -393,6 +395,7 @@ main {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 0.15fr;
     gap: 8px;
+    max-width: unset;
   }
 
   .book-image {
