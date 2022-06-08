@@ -2,9 +2,9 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
   const SHELVES = ['currentlyReading', 'wantToRead', 'read'];
 
   return (
-    <section>
-      <h3>{listTitle}</h3>
-      <ul>
+    <>
+      <h3 className="list-title">{listTitle}</h3>
+      <ul className="list-books">
         {books.map(book => {
           const isNewBook = book.shelf == null;
 
@@ -12,16 +12,11 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
             <li key={book.id}>
               <div className="book-card">
                 <img
+                  className="book-image"
                   src={book.imageLinks?.thumbnail}
                   alt={book.title}
-                  style={{
-                    width: '120px',
-                    height: '160px',
-                    borderRadius: '3px',
-                    objectFit: 'cover',
-                  }}
                 />
-                <div>
+                <div className="book-info">
                   <h4>{book.title}</h4>
                   <h5>{book.authors?.join(' & ')}</h5>
                 </div>
@@ -60,7 +55,7 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
           );
         })}
       </ul>
-    </section>
+    </>
   );
 };
 

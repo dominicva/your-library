@@ -10,21 +10,19 @@ const Home = ({ books, shelves, onShelfChange }) => {
         <Link to="/search">Search books</Link>
       </button>
       <main>
-        <section>
-          {Object.keys(shelves).map(shelf => {
-            const shelfBooks = books.filter(b => b.shelf === shelf);
+        {Object.keys(shelves).map(shelf => {
+          const shelfBooks = books.filter(b => b.shelf === shelf);
 
-            return (
-              <div key={shelf}>
-                <BooksList
-                  listTitle={shelf}
-                  books={shelfBooks}
-                  onShelfChange={onShelfChange}
-                />
-              </div>
-            );
-          })}
-        </section>
+          return (
+            <section key={shelf} className="list-container">
+              <BooksList
+                listTitle={shelf}
+                books={shelfBooks}
+                onShelfChange={onShelfChange}
+              />
+            </section>
+          );
+        })}
       </main>
     </div>
   );
