@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import BookDetails from './components/BookDetails';
 import Home from './components/Home';
 import SearchBooks from './components/SearchBooks';
 import * as BooksAPI from './utils/booksAPI';
@@ -63,31 +64,31 @@ const App = () => {
   }
 
   return (
-    <>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              books={books}
-              shelves={shelvesState}
-              onShelfChange={handleShelfChange}
-            />
-          }
-        />
-        <Route
-          path="/search"
-          element={
-            <SearchBooks
-              books={books}
-              shelvesState={shelvesState}
-              onShelfChange={handleShelfChange}
-              onAddBook={handleAddBook}
-            />
-          }
-        />
-      </Routes>
-    </>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <Home
+            books={books}
+            shelves={shelvesState}
+            onShelfChange={handleShelfChange}
+          />
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <SearchBooks
+            books={books}
+            shelvesState={shelvesState}
+            onShelfChange={handleShelfChange}
+            onAddBook={handleAddBook}
+          />
+        }
+      />
+      <Route path="/:bookId" element={<BookDetails />} />
+      <Route path="*" element={<div>Not found</div>} />
+    </Routes>
   );
 };
 

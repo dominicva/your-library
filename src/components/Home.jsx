@@ -6,9 +6,9 @@ const Home = ({ books, shelves, onShelfChange }) => {
   return (
     <div id="home">
       <Header />
-      <button id="search-books-btn">
-        <Link to="/search">Search books</Link>
-      </button>
+      <Link to="/search">
+        <button>Search books</button>
+      </Link>
       <main>
         {Object.keys(shelves).map(shelf => {
           const shelfBooks = books.filter(b => b.shelf === shelf);

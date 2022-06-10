@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { camelToTitle } from '../utils/strings';
 import { BookCardBase, SelectNewBook, SelectOldBook } from './lib/BookHelpers';
 
@@ -18,6 +20,12 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
                 ) : (
                   <SelectOldBook book={book} onShelfChange={onShelfChange} />
                 )}
+
+                {!isNewBook ? (
+                  <Link to={`/${book.id}`} className="hover-accent">
+                    <button className="outline">Expand details</button>
+                  </Link>
+                ) : null}
               </div>
             </li>
           );

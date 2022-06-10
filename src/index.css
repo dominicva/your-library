@@ -163,10 +163,11 @@ button {
   min-width: 100px;
   min-height: 48px;
   transition: 0.25s all linear;
+  transition-delay: 0.3s;
 }
 
 button:hover {
-  border-radius: 32px;
+  background-color: var(--accent-red);
 }
 
 button:focus {
@@ -194,6 +195,8 @@ button.outline {
   --primary-color-darker: var(--accent-green);
   background-color: transparent;
   border: 1px solid var(--accent-green);
+  transition: 0.3s all linear;
+  transition-delay: 0.2s;
 }
 
 button.accent {
@@ -206,12 +209,12 @@ button.outline.accent {
   border: 1px solid var(--accent-red);
 }
 
-/* LINKS */
-
-button > a,
-button > a:hover {
-  background: none;
+button.outline:hover {
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
 }
+
+/* LINKS */
 
 a {
   color: unset;
@@ -225,7 +228,7 @@ https://css-tricks.com/css-hover-effects-background-masks-3d/
 */
 a {
   --b: 1.5px; /* the thickness of the line */
-  --c: var(--white); /* the color */
+  --c: var(--accent-red);
   padding-block: var(--b);
   background: linear-gradient(var(--c) 50%, #000 0) 0%
       calc(100% - var(--_p, 0%)) / 100% 200%,
@@ -260,6 +263,12 @@ a.accent.red {
   --c: var(--accent-red);
 }
 
+a.hover-accent:hover {
+  color: var(--accent-red);
+  filter: brightness(1.1);
+  --c: var(--accent-red);
+}
+
 .book-card {
   margin-bottom: 24px;
   border: 0.5px solid var(--accent-green);
@@ -271,6 +280,7 @@ a.accent.red {
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  overflow: hidden;
 }
 
 main {
@@ -295,19 +305,20 @@ main {
   object-fit: cover;
 }
 
-.book-info {
+.book-details .book-info {
   align-self: center;
   justify-self: center;
 }
 
 select {
-  min-height: 40px;
+  min-height: 48px;
   width: 140px;
   justify-self: center;
   color: var(--primary-color-lighter);
   background-color: transparent;
   padding: 4px;
   border-radius: 2px;
+  cursor: pointer;
   border: 1px solid var(--primary-color-lighter);
 }
 
@@ -388,4 +399,53 @@ input:focus {
   color: var(--primary-color-lighter);
   font-weight: 600;
   letter-spacing: 0.75px;
+}
+
+.book-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 16px;
+  max-width: 560px;
+  margin: auto;
+}
+
+.book-details #link-to-home {
+  margin-bottom: 16px;
+}
+
+#details-hero {
+  display: flex;
+  gap: 48px;
+  align-items: flex-end;
+}
+
+.book-details-header {
+  margin-bottom: -6px;
+}
+
+.book-details-header > * {
+  font-family: var(--heading);
+  color: var(--primary-color-lighter);
+}
+
+.book-details .book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.book-info-label {
+  color: var(--primary-color-lighter);
+  font-family: var(--heading);
+  font-size: 1.1rem;
+}
+
+h3.book-info-label {
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+#description-heading {
+  font-size: 1.75rem;
 }
