@@ -34,7 +34,7 @@ const BookDetails = () => {
 
         <div className="book-info">
           <p className="book-info-label">
-            Published on{new Date(book.publishedDate).toDateString()}
+            Published on {new Date(book.publishedDate).toDateString()}
           </p>
           <p className="book-info-label">{book.pageCount} pages</p>
           {book.categories ? (
