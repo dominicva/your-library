@@ -296,6 +296,7 @@ main {
 .list-title {
   grid-column: span 2;
   margin-bottom: 8px;
+  font-size: 2rem;
 }
 
 .book-image {
@@ -389,6 +390,7 @@ input:focus {
 }
 
 #search-books {
+  margin-top: 4px;
   max-width: 320px;
   padding: 12px 16px;
   font-size: 1rem;

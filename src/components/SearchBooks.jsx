@@ -44,11 +44,11 @@ const SearchBooks = ({ books, shelvesState, onShelfChange, onAddBook }) => {
         </Link>
       </div>
       <header>
-        <h2>Search for books</h2>
+        <h2>Find new books for your library</h2>
       </header>
       <form id="search-books-form" onSubmit={e => e.preventDefault()}>
         <div className="form-control">
-          <label htmlFor="search-books">Search book world</label>
+          <label htmlFor="search-books">Search books</label>
           <input
             id="search-books"
             type="text"

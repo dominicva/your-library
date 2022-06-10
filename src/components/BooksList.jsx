@@ -4,9 +4,13 @@ import { camelToTitle } from '../utils/strings';
 import { BookCardBase, SelectNewBook, SelectOldBook } from './lib/BookHelpers';
 
 const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
+  const isEmpty = books.length === 0;
+
   return (
     <>
-      <h3 className="list-title">{camelToTitle(listTitle)}</h3>
+      {isEmpty ? null : (
+        <h3 className="list-title">{camelToTitle(listTitle)}</h3>
+      )}
       <ul className="list-books">
         {books.map(book => {
           const isNewBook = book.shelf == null;
