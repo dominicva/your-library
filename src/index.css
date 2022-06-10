@@ -313,6 +313,7 @@ main {
 
 select {
   min-height: 48px;
+  margin: 8px 0;
   width: 140px;
   justify-self: center;
   color: var(--primary-color-lighter);

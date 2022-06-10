@@ -33,6 +33,7 @@ const App = () => {
 
     const initBooks = async () => {
       const starterBooks = await BooksAPI.getAll();
+      window.localStorage.setItem('books', JSON.stringify(starterBooks));
       setBooks(starterBooks);
     };
 
@@ -65,6 +66,7 @@ const App = () => {
 
   return (
     <Routes>
+      <Route path="*" element={<h1>Page not found</h1>} />
       <Route
         path="/"
         element={
@@ -87,7 +89,6 @@ const App = () => {
         }
       />
       <Route path="/:bookId" element={<BookDetails />} />
-      <Route path="*" element={<div>Not found</div>} />
     </Routes>
   );
 };
