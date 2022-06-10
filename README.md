@@ -19,7 +19,7 @@ This was really an opportunity to practice react and state management.
 
 - Change the shelf a book is on
 
-- If a book is in your library, you can see an expanded view of the its details
+- If a book is in your library, you can see an expanded view of its details
 
 ## Installation
 
