@@ -270,10 +270,10 @@ a.hover-accent:hover {
 }
 
 .book-card {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   border: 0.5px solid var(--accent-green);
   border-radius: 4px;
-  padding: 16px;
+  padding: 32px 24px;
   min-height: 360px;
   display: flex;
   flex-direction: column;
@@ -281,6 +281,14 @@ a.hover-accent:hover {
   align-items: center;
   text-align: center;
   overflow: hidden;
+  gap: 16px;
+}
+
+#book-card-control {
+  margin-top: 24px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 main {
@@ -313,7 +321,6 @@ main {
 
 select {
   min-height: 48px;
-  margin: 8px 0;
   width: 140px;
   justify-self: center;
   color: var(--primary-color-lighter);
@@ -368,6 +375,10 @@ input:focus {
     text-align: unset;
     margin: unset;
   }
+  #book-card-control {
+    grid-column: span 2;
+    justify-content: space-around;
+  }
 
   .book-image {
     align-self: center;
@@ -408,7 +419,7 @@ input:focus {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 32px 16px;
+  padding: 32px 24px;
   max-width: 560px;
   margin: auto;
 }

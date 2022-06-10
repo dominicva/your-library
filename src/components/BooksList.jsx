@@ -19,17 +19,19 @@ const BooksList = ({ listTitle, books, onShelfChange, onAddBook }) => {
             <li key={book.id}>
               <div className="book-card">
                 <BookCardBase book={book} />
-                {isNewBook ? (
-                  <SelectNewBook book={book} onAddBook={onAddBook} />
-                ) : (
-                  <SelectOldBook book={book} onShelfChange={onShelfChange} />
-                )}
+                <div id="book-card-control">
+                  {isNewBook ? (
+                    <SelectNewBook book={book} onAddBook={onAddBook} />
+                  ) : (
+                    <SelectOldBook book={book} onShelfChange={onShelfChange} />
+                  )}
 
-                {!isNewBook ? (
-                  <Link to={`/${book.id}`} className="hover-accent">
-                    <button className="outline">Expand details</button>
-                  </Link>
-                ) : null}
+                  {!isNewBook ? (
+                    <Link to={`/${book.id}`} className="hover-accent">
+                      <button className="outline">Expand details</button>
+                    </Link>
+                  ) : null}
+                </div>
               </div>
             </li>
           );
